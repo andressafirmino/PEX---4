@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { FaCircle } from "react-icons/fa6";
 
 export const ButtonContainer = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 80px;
   background-color: #FFFFFF;
   position: fixed;

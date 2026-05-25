@@ -1,6 +1,12 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+    html, body, #root {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
     *, *::before, *::after {
         box-sizing: border-box;
         font-family: "Roboto", sans-serif;

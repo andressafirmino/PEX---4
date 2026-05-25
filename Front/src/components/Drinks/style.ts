@@ -2,6 +2,8 @@ import styled from 'styled-components';
 
 export const DrinksContainer = styled.div`
     width: 100%;
+    min-width: 0;
+    max-width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -11,8 +13,10 @@ export const DrinksContainer = styled.div`
 
 export const DrinkOption = styled.div`
     width: 100%;
+    min-width: 0;
+    max-width: 100%;
     display: flex;
     overflow-x: auto;
-    white-space: nowrap; 
+    white-space: nowrap;
     scroll-behavior: smooth;
-`
+`;
