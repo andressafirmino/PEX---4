@@ -1,0 +1,75 @@
+OBJETIVO:
+
+O objetivo deste projeto foi desenvolver a API RESTful responsável pelo gerenciamento de dados da aplicação, especificamente focada na administração do catálogo de produtos da lanchonete. Essa API serve como infraestrutura para o frontend consumir, permitindo que os administradores da lanchonete insiram, atualizem e controlem a oferta de produtos disponíveis para os clientes.
+
+DESENVOLVIMENTO:
+
+1. Infraestrutura e Configuração Inicial
+Esta fase concentrou-se na criação da estrutura base do projeto e na configuração das ferramentas essenciais.
+
+- Inicialização do Projeto: Configuração de um ambiente Node.js com TypeScript e Express para garantir um código tipado e escalável.
+
+- Gerenciamento de Dependências: Instalação e configuração de bibliotecas chave, incluindo:
+
+- dotenv e dotenv-cli para gerenciar variáveis de ambiente de forma segura (JWT_SECRET, DATABASE_URL).
+
+- bcrypt para hashing de senhas.
+
+- jsonwebtoken (JWT) para autenticação baseada em tokens.
+
+- express-async-errors para tratamento centralizado de erros em rotas assíncronas.
+
+- Configuração de Build e Execução: Definição de scripts (package.json) para diferentes ambientes (dev, start, build), incluindo a correção de path aliases (@/) usando tsc-alias e tsconfig-paths para garantir que o código compilado funcione corretamente em produção.
+
+2. Camada de Dados e Banco de Dados (Prisma/PostgreSQL)
+O foco foi estabelecer a conexão robusta e tipada com o banco de dados.
+
+- Banco de Dados: Utilização de PostgreSQL.
+
+- ORM: Implementação do Prisma como Object-Relational Mapper, definindo o schema.prisma para o modelo de dados de produtos e usuaŕios.
+
+- Migrações: Criação e gerenciamento das migrações do banco de dados (prisma migrate dev/deploy) para controle de versão do schema.
+
+- Seed: Desenvolvimento de um script de seeding (npm run dev:seed) para popular o banco de dados com dados iniciais (ex: credenciais de administrador padrão).
+
+3. Desenvolvimento dos Módulos Essenciais
+Desenvolvimento das funcionalidades principais, divididas em módulos (Service, Controller, Repository) para separação de responsabilidades.
+
+3.1. Autenticação e Autorização (Módulo Admin/Auth)
+- Registro (Implicitamente): Foi preparado um modelo de usuário/administrador com campos essenciais.
+
+- Login (/sign-in): Implementação da lógica de login, incluindo:
+
+- Busca do usuário por username (adminRepository.findByUsername).
+
+- Verificação de senha segura usando bcrypt.compare.
+
+- Geração e assinatura do JWT contendo userId e role com validade de 7 dias (expiresIn: '7d').
+
+- Middleware de Autenticação: Criação de um middleware para proteger rotas (/products), verificando o token JWT enviado no cabeçalho Authorization: Bearer <token>.
+
+3.2. Gerenciamento de Produtos (Módulo Products)
+- Definição do Modelo: Criação do modelo Product (com campos como name, description, price, type).
+
+- Endpoints Protegidos: Implementação das rotas para as operações essenciais, protegidas pelo middleware de autenticação JWT quando necessáio:
+
+- POST /products: Criação de novos produtos.
+
+- GET /products: Listagem de todos os produtos.
+
+4. Próximos Passos (Integração)
+- Com a API pronta e funcionando localmente (endpoints de produtos e autenticação testados via REST Client), o projeto está pronto para a integração com o frontend (aplicação web de pedidos), feito anteriormente na PEX-2.
+
+- Adicionar endpoints para atualização e exclusão de produtos:
+
+- PUT /products/:id: Atualização de um produto existente.
+
+- DELETE /products/:id: Remoção de um produto.
+
+- Permitir adição de imagens ao criar um produto.
+
+CONCLUSÃO:
+
+O principal foco do projeto foi construir a estrutura de backend para a busca dos produtos da lanchonete. Um aprendizado crucial foi a forma de montar essa estrutura de forma robusta, resolvendo o desafio de fazer o sistema entender os atalhos de pastas (@/) quando o código é compilado para produção, o que foi resolvido com o uso do tsc-alias e ajustes nas configurações do projeto.
+
+Em termos de funcionalidades, o maior resultado foi a entrega de uma API com segurança e persistência de dados. Com a implementação da autenticação JWT, para proteger o acesso administrativo, e garantir a segurança das senhas com bcrypt. Para o banco de dados, utilizamos o Prisma com PostgreSQL, o que permitiu modelar e gerenciar a tabela de produtos de maneira organizada. Com isso, o projeto entregou a Central de Produtos, que já pode ser conectada ao frontend para alimentar o sistema de pedidos, e finalizamos com a criação dos comandos que automatizam a compilação e o lançamento do projeto , tornando o processo de colocar a API no ar muito mais rápido.

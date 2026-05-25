@@ -1,0 +1,33 @@
+# Dependencies
+**/node_modules/
+
+# Build / cache
+**/dist/
+**/.vite/
+**/*.tsbuildinfo
+
+# Environment (keep examples)
+**/.env
+**/.env.*
+!**/.env.example
+
+# Logs
+**/*.log
+
+# IDE
+**/.idea/
+**/.vscode/*
+!**/.vscode/extensions.json
+
+# OS
+**/.DS_Store
+
+# Prisma generated (Back)
+**/generated/prisma
+
+# Back-specific
+*.http
+
+# Front-specific
+**/dist-ssr/
+**/*.local
