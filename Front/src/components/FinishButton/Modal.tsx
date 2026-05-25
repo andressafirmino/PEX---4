@@ -4,7 +4,7 @@ import { ItemsContext } from "../../context/items";
 import type { MenuItemType } from "../../protocols";
 
 export default function Modal({ isOpen, onClose }: ModalProps) {
-    const { selectedItems, total, setSelectedItems, setTotal } = useContext(ItemsContext);
+    const { selectedItems, total, setSelectedItems } = useContext(ItemsContext);
     if (!isOpen) return null;
 
     function SendRequest(items: MenuItemType[]) {
@@ -35,7 +35,7 @@ export default function Modal({ isOpen, onClose }: ModalProps) {
                 )}
                 <TotalContainer>
                     <Total >Total: {new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(total)}</Total>
-                    <Confirm onClick={() => { SendRequest(selectedItems), onClose(), setSelectedItems([]), setTotal(0) }} ><p>Confirmar!</p></Confirm>
+                    <Confirm onClick={() => { SendRequest(selectedItems); onClose(); setSelectedItems([]); }} ><p>Confirmar!</p></Confirm>
                 </TotalContainer>
             </ModalContainer>
         </Backdrop>

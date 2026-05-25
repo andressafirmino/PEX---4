@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useMemo, useState } from 'react';
 import type { ReactNode } from 'react';
 import type { MenuItemType, MenuType } from '../protocols';
 import { EMPTY_MENU } from '../protocols';
@@ -12,7 +12,10 @@ interface ItemsContextProps {
     selected: boolean;
     setSelected: React.Dispatch<React.SetStateAction<boolean>>;
     total: number;
-    setTotal: React.Dispatch<React.SetStateAction<number>>;
+}
+
+function calculateTotal(items: MenuItemType[]): number {
+    return items.reduce((acc, item) => acc + Number(item.price), 0);
 }
 
 export const ItemsContext = createContext<ItemsContextProps>({
@@ -23,7 +26,6 @@ export const ItemsContext = createContext<ItemsContextProps>({
     selected: false,
     setSelected: () => { },
     total: 0,
-    setTotal: () => { },
 });
 
 interface ItemsProviderProps {
@@ -34,7 +36,7 @@ export default function ItemsProvider({ children }: ItemsProviderProps) {
     const [menu, setMenu] = useState<MenuType>(EMPTY_MENU);
     const [selectedItems, setSelectedItems] = useState<MenuItemType[]>([]);
     const [selected, setSelected] = useState<boolean>(false);
-    const [total, setTotal] = useState<number>(0);
+    const total = useMemo(() => calculateTotal(selectedItems), [selectedItems]);
 
     useEffect(() => {
         let isMounted = true;
@@ -70,7 +72,6 @@ export default function ItemsProvider({ children }: ItemsProviderProps) {
                 selected,
                 setSelected,
                 total,
-                setTotal,
             }}
         >
             {children}

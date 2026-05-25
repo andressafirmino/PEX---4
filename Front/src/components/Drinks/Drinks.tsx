@@ -5,20 +5,18 @@ import Drink from '../Drink/Drink';
 import { ItemsContext } from '../../context/items';
 
 export default function Drinks() {
-    const { menu, setSelectedItems, setTotal } = useContext(ItemsContext);
+    const { menu, setSelectedItems } = useContext(ItemsContext);
 
     function toggleItems(name: string) {
+        const item = menu.drinks.find(drink => drink.name === name);
+        if (!item) return;
+
         setSelectedItems(prevItems => {
-            const isSelected = prevItems.some(item => item.name === name);
+            const isSelected = prevItems.some(selected => selected.name === name);
 
-            const newItems = isSelected
-                ? prevItems.filter(item => item.name !== name)
-                : [...prevItems, menu.drinks.find(item => item.name === name)!];
-
-            const newTotal = newItems.reduce((acc, item) => acc + Number(item.price), 0);
-            setTotal(newTotal);
-
-            return newItems;
+            return isSelected
+                ? prevItems.filter(selected => selected.name !== name)
+                : [...prevItems, item];
         });
     }
 
