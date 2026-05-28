@@ -7,16 +7,17 @@ This project was created as a simple and practical way to modernize the service 
 This project was developed to simplify the selection of items from a menu.
 
 #### Features.
-
+ 
+- **Customer Flow:**
 - Select one or more items from the menu.
+- The total amount is updated according to the selected items.
+- The checkout button is only enabled when one or more items are selected.
+- When clicking the checkout button, a summary of the order appears on the screen.
+- When clicking the confirm button, the user is redirected to the conversation with the store with the order already ready.
 
-- The total amount is updated according to the selected items
-
-- The checkout button is only enabled when one or more items are selected
-
-- When clicking the checkout button, a summary of the order appears on the screen, with a button to confirm the order
-
-- When clicking the confirm button, the user is redirected to the conversation with the store with the order already ready
+**Admin Flow:**
+- Secure Admin login screen for management access.
+- Dedicated interface to easily add new products to the catalog.
 
 # Technologies used
 For this project, the following were used:

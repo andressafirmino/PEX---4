@@ -16,7 +16,7 @@ This project is a simple and practical API designed to modernize the service pro
 # Technologies used
 For this project, the following were used:
 
-- Node (v22 ou superior — o Prisma 7 não roda bem com Node 21);
+- Node (v22 or higher — *Note: Prisma 7 may have compatibility issues with Node 21*);
 - Express;
 - TypeScript;
 - Prisma;
@@ -30,16 +30,16 @@ To run this project under development, you need to follow the steps below:
 3. Enter the project folder on your machine, open the terminal and download the necessary dependencies with the command: `npm install`;
 4. Create the .env file in the project root and configure the variables according to the .env.example file.
 5. Apply the migrations using the command: `npm run dev:migration:run`;
-6. Populate the Seed Database using the command: `npm run dev:seed` (cria admin e os 12 produtos do cardápio mockado). Se `prisma db seed` falhar com `ERR_REQUIRE_ESM`, use Node 22+ ou apenas `npm run dev:seed` (já executa o seed direto);
+6. Populate the Seed Database using the command: `npm run dev:seed` (creates the admin and the 12 products for the mocked menu). If `prisma db seed` fails with `ERR_REQUIRE_ESM`, use Node 22+ or simply run `npm run dev:seed` (which executes the seed directly);
 7. To run the project in development, run the command `npm run dev`
 
-## Imagens dos produtos
+## Product Images
 
-O banco guarda apenas a **URL da imagem** no campo `imageUrl` (não o arquivo em si).
+The database only stores the **image URL** in the `imageUrl` field (not the file itself).
 
-- Arquivos ficam em `Back/public/images/{snacks|drinks|desserts}/`
-- A API serve em `http://localhost:4000/images/...`
-- O seed grava URLs completas, ex.: `http://localhost:4000/images/snacks/aipim-carne.jpg`
+- Files are located in `Back/public/images/{snacks|drinks|desserts}/`
+- The API serves them at `http://localhost:4000/images/...`
+- The seed populates complete URLs, e.g., `http://localhost:4000/images/snacks/aipim-carne.jpg`
 
 
 # How to run it in production?
